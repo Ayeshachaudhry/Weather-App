@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Search Box Container Styling */
+.search-container {
+  display: flex; /* Use flexbox to align items */
+  flex-direction: row; /* Arrange items horizontally */
+  align-items: center; /* Center items vertically */
+  margin-top: 1rem; /* Add space above the search box */
+}
+
+/* Search Input Box Styling */
+input[type="text"] {
+  padding: 0.8rem 1rem; /* Add padding for comfort */
+  font-size: 1.2rem; /* Increase font size for readability */
+  border: 2px solid #3498db; /* Add border */
+  border-radius: 25px; /* Round corners for a softer look */
+  outline: none; /* Remove default outline */
+  margin-right: 1rem; /* Space between input and button */
+  width: 100%; /* Make input responsive */
+  max-width: 400px; /* Limit max width */
+  color: #333; /* Text color */
+  background-color: #fff; /* White background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: border-color 0.3s ease; /* Smooth transition on focus */
+}
+
+/* Input Placeholder Styling */
+input[type="text"]::placeholder {
+  color: #aaa; /* Light gray for placeholder text */
+  font-style: italic; /* Italicize placeholder */
+}
+
+/* Input Focus Styling */
+input[type="text"]:focus {
+  border-color: #2980b9; /* Change border color on focus */
+}
+
+/* Search Button Styling */
+button {
+  margin-top: 15px;
+  padding: 0.8rem 1.5rem; /* Adjust padding */
+  font-size: 1.2rem; /* Increase font size */
+  background-color: #3498db; /* Button color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 25px; /* Round corners */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+/* Button Hover Effect */
+button:hover {
+  background-color: #2980b9; /* Darker shade on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Button Active Effect */
+button:active {
+  transform: translateY(0); /* Return to normal on click */
+}
