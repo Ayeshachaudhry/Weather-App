@@ -9,20 +9,33 @@ const api = {
 function App() {
   const [search, setSearch] = useState('');
   const [weather, setWeather] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const searchPressed = () => {
+    setLoading(true);
+    setError(null);
     fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
-        setWeather(result);
-        console.log(result); // Debugging output
+        setLoading(false);
+        if (result.cod !== 200) {
+          setError(result.message);
+          setWeather({});
+        } else {
+          setWeather(result);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError('Failed to fetch data');
+        console.error(err); // Debugging error
       });
   };
 
   return (
     <div className="App">
       <header className="App-header">
-        {/* Header */}
         <h1>Weather App</h1>
 
         {/* Search Box */}
@@ -30,26 +43,25 @@ function App() {
           <input
             type="text"
             placeholder="Enter city/town..."
-            onChange={(e) => setSearch(e.target.value)} // Move onChange to input
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button onClick={searchPressed}>Search</button>
         </div>
 
-        {/* If weather is not undefined */}
-        {typeof weather.main !== 'undefined' ? (
+        {/* Loading Indicator */}
+        {loading && <p>Loading...</p>}
+
+        {/* Error Message */}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        {/* Weather Info */}
+        {typeof weather.main !== 'undefined' && !loading && !error && (
           <div>
-            {/* Location */}
             <p>{weather.name}</p>
-
-            {/* Temperature */}
             <p>{weather.main.temp} °C</p>
-
-            {/* Condition */}
             <p>{weather.weather[0].main}</p>
             <p>({weather.weather[0].description})</p>
           </div>
-        ) : (
-          ''
         )}
       </header>
     </div>
